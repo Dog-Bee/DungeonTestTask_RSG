@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: '_scriptableObjectInstallers.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: b699474587e03a74dafa628a20f64df8, type: 2}
+    - target: {fileID: 7877576881433532857, guid: 2b9345f28c2b956498f42997199a98ee, type: 3}
+      propertyPath: '_scriptableObjectInstallers.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 174e0210dc9e3f24aab819a868d2f558, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
