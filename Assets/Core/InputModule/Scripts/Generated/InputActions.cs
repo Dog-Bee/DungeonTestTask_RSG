@@ -37,6 +37,15 @@ namespace Core.InputModule.Generated
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseHealPotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""43c5f246-84bb-458c-8140-55f40faa6cff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ namespace Core.InputModule.Generated
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d7c68cc-f2a3-4279-88c4-d40ab353a061"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""UseHealPotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -636,6 +656,7 @@ namespace Core.InputModule.Generated
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+            m_Player_UseHealPotion = m_Player.FindAction("UseHealPotion", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -716,11 +737,13 @@ namespace Core.InputModule.Generated
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Interaction;
+        private readonly InputAction m_Player_UseHealPotion;
         public struct PlayerActions
         {
             private @DefaultInputActions m_Wrapper;
             public PlayerActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+            public InputAction @UseHealPotion => m_Wrapper.m_Player_UseHealPotion;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -733,6 +756,9 @@ namespace Core.InputModule.Generated
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
+                @UseHealPotion.started += instance.OnUseHealPotion;
+                @UseHealPotion.performed += instance.OnUseHealPotion;
+                @UseHealPotion.canceled += instance.OnUseHealPotion;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -740,6 +766,9 @@ namespace Core.InputModule.Generated
                 @Interaction.started -= instance.OnInteraction;
                 @Interaction.performed -= instance.OnInteraction;
                 @Interaction.canceled -= instance.OnInteraction;
+                @UseHealPotion.started -= instance.OnUseHealPotion;
+                @UseHealPotion.performed -= instance.OnUseHealPotion;
+                @UseHealPotion.canceled -= instance.OnUseHealPotion;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -923,6 +952,7 @@ namespace Core.InputModule.Generated
         public interface IPlayerActions
         {
             void OnInteraction(InputAction.CallbackContext context);
+            void OnUseHealPotion(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

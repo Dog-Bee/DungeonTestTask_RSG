@@ -4,28 +4,34 @@ namespace Global.Scripts.Generated {
     public static class Address { 
         public static List<string> AllKeys = new() {
             "InteractConfiguration",
+            "EntitiesConfiguration_Default",
             "ItemsConfiguration_Default",
             "GamePrefabsConfiguration",
-            "EntitiesConfiguration_Default",
             "BootstrapScene",
             "GlobalScene",
             "SurfaceScene",
             "DungeonScene",
+            "UIGeneral",
             "Player",
+            "Potion",
             "Standard_Enemy",
+            "Book",
             "PlayerCamera",
             "Seller",
+            "GlobalInventoryModel_Default",
+            "PlayerMoneyModel",
+            "PlayerHealthModel",
         }; 
         public static class Configurations { 
             public const System.String InteractConfiguration = "InteractConfiguration"; 
+            public const System.String EntitiesConfiguration_Default = "EntitiesConfiguration_Default"; 
             public const System.String ItemsConfiguration_Default = "ItemsConfiguration_Default"; 
             public const System.String GamePrefabsConfiguration = "GamePrefabsConfiguration"; 
-            public const System.String EntitiesConfiguration_Default = "EntitiesConfiguration_Default"; 
             public static List<string> AllKeys = new() {
                 "InteractConfiguration",
+                "EntitiesConfiguration_Default",
                 "ItemsConfiguration_Default",
                 "GamePrefabsConfiguration",
-                "EntitiesConfiguration_Default",
             }; 
         } 
 
@@ -43,15 +49,32 @@ namespace Global.Scripts.Generated {
         } 
 
         public static class Prefabs { 
+            public const System.String UIGeneral = "UIGeneral"; 
             public const System.String Player = "Player"; 
+            public const System.String Potion = "Potion"; 
             public const System.String Standard_Enemy = "Standard_Enemy"; 
+            public const System.String Book = "Book"; 
             public const System.String PlayerCamera = "PlayerCamera"; 
             public const System.String Seller = "Seller"; 
             public static List<string> AllKeys = new() {
+                "UIGeneral",
                 "Player",
+                "Potion",
                 "Standard_Enemy",
+                "Book",
                 "PlayerCamera",
                 "Seller",
+            }; 
+        } 
+
+        public static class Data { 
+            public const System.String GlobalInventoryModel_Default = "GlobalInventoryModel_Default"; 
+            public const System.String PlayerMoneyModel = "PlayerMoneyModel"; 
+            public const System.String PlayerHealthModel = "PlayerHealthModel"; 
+            public static List<string> AllKeys = new() {
+                "GlobalInventoryModel_Default",
+                "PlayerMoneyModel",
+                "PlayerHealthModel",
             }; 
         } 
 

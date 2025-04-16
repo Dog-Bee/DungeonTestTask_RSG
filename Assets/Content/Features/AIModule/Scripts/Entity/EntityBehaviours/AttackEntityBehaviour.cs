@@ -2,8 +2,10 @@
 using Content.Features.DamageablesModule.Scripts;
 using UnityEngine;
 
-namespace Content.Features.AIModule.Scripts.Entity.EntityBehaviours {
-    public class AttackEntityBehaviour : IEntityBehaviour {
+namespace Content.Features.AIModule.Scripts.Entity.EntityBehaviours
+{
+    public class AttackEntityBehaviour : IEntityBehaviour
+    {
         private EntityContext _entityContext;
         private IDamageable _targetDamageable;
 
@@ -12,21 +14,29 @@ namespace Content.Features.AIModule.Scripts.Entity.EntityBehaviours {
         public void InitContext(EntityContext entityContext) =>
             _entityContext = entityContext;
 
-        public void SetTarget(IDamageable damageable) =>
-            _targetDamageable = damageable;
+        public void SetTarget(IDamageable damageable)=> _targetDamageable = damageable;
         
-        public void Start() {
+
+        public void Start()
+        {
+            if (_targetDamageable == _entityContext.EntityDamageable)
+            {
+                OnBehaviorEnd?.Invoke();
+                return;
+            }
             _entityContext.NavMeshAgent.speed = _entityContext.EntityData.Speed;
             _entityContext.EntityAnimator.OnAttackTriggered += OnAttackTriggered;
         }
 
-        public void Process() {
-            if(_targetDamageable.IsActive is false) {
+        public void Process()
+        {
+            if (_targetDamageable.IsActive is false)
+            {
                 OnBehaviorEnd?.Invoke();
                 return;
             }
 
-            if(IsNearTheTarget())
+            if (IsNearTheTarget())
                 StartAttacking();
             else
                 MoveToTarget();
@@ -35,10 +45,11 @@ namespace Content.Features.AIModule.Scripts.Entity.EntityBehaviours {
         public void Stop() =>
             _entityContext.EntityAnimator.OnAttackTriggered -= OnAttackTriggered;
 
-        private void MoveToTarget() {
-            if(_targetDamageable.IsActive is false)
+        private void MoveToTarget()
+        {
+            if (_targetDamageable.IsActive is false)
                 return;
-            
+
             _entityContext.EntityAnimator.SetIsAttacking(false);
             _entityContext.NavMeshAgent.SetDestination(_targetDamageable.Position);
         }
@@ -46,14 +57,17 @@ namespace Content.Features.AIModule.Scripts.Entity.EntityBehaviours {
         private void StopMoving() =>
             _entityContext.NavMeshAgent.ResetPath();
 
-        private bool IsNearTheTarget() {
-            if (_targetDamageable.IsActive is false)
+        private bool IsNearTheTarget()
+        {
+            if (!_targetDamageable.IsActive)
                 return false;
-            
-            return Vector3.Distance(_entityContext.EntityDamageable.Position, _targetDamageable.Position) <= _entityContext.EntityData.AttackDistance;
+
+            return Vector3.Distance(_entityContext.EntityDamageable.Position, _targetDamageable.Position) <=
+                   _entityContext.EntityData.AttackDistance;
         }
 
-        private void StartAttacking() {
+        private void StartAttacking()
+        {
             _entityContext.EntityAnimator.SetIsAttacking(true);
             StopMoving();
         }

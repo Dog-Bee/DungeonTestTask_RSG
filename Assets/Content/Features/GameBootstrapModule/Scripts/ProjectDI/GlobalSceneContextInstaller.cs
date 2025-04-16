@@ -14,12 +14,14 @@ namespace Content.Features.GameBootstrapModule.Scripts.ProjectDI {
     public class GlobalSceneContextInstaller : ScriptableObjectInstaller<GlobalSceneContextInstaller> {
         public override void InstallBindings() {
             PrefabSpawnerInstaller.Install(Container);
-            PlayerDataInstaller.Install(Container);
             CameraInstaller.Install(Container);
             StorageModuleInstaller.Install(Container);
             InteractionSystemInstaller.Install(Container);
             AIInstaller.Install(Container);
+            PlayerDataInstaller.Install(Container);
             LootInstaller.Install(Container);
+            
+            UIInstaller.Install(Container);
         }
     }
 }
